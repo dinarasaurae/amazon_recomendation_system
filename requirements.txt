@@ -1,9 +1,8 @@
+pip --upgrade
 community==1.0.0b1
 matplotlib==3.6.3
 networkx==3.1
 python_louvain==0.16
 scikit_learn==1.3.2
 streamlit==1.23.0
-pillow>=10.0.0
-zlib
-
+pillow
