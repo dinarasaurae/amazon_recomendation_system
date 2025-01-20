@@ -1,3 +1,5 @@
+import os
+import gdown
 import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -9,6 +11,14 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.neighbors import NearestNeighbors
 import community.community_louvain as community_louvain
+
+@st.cache_data
+def load_data(file_path="Amazon-Products.csv"):
+    if not os.path.exists(file_path):
+        file_url = "https://drive.google.com/file/d/1mylOZKC26K6adVEJuNEOj6mSKJN7j1yi/view?usp=sharing"
+        gdown.download(file_url, file_path, quiet=False)
+
+    return pd.read_csv(file_path)
 
 def styled_heading(text):
     st.markdown(
@@ -30,7 +40,11 @@ def colored_line():
     st.markdown("<hr style='border:none; height:3px; background:#ff7e5f; margin:10px 0;'>", unsafe_allow_html=True)
 
 @st.cache_data
-def load_data(file_path):
+def load_data(file_path="Amazon-Products.csv"):
+    if not os.path.exists(file_path):
+        file_url = "https://drive.google.com/file/d/1mylOZKC26K6adVEJuNEOj6mSKJN7j1yi/view?usp=sharing"
+        gdown.download(file_url, file_path, quiet=False)
+
     df = pd.read_csv(file_path)
 
     if "Amazon-Products.csv" in file_path:
